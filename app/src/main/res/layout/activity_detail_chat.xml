@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/backapp"
+    tools:context=".DetailChatActivity">
+
+    <LinearLayout
+        android:id="@+id/toobar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="20dp"
+        android:paddingStart="30dp"
+        android:paddingEnd="30dp"
+        android:paddingTop="30dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        >
+
+        <ImageView
+            android:id="@+id/img_back"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@drawable/back"
+            android:layout_marginEnd="20dp"
+            app:tint="#666666" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/avtleeminho"
+            app:shapeAppearanceOverlay="@style/Circler"
+            android:scaleType="centerCrop"
+            android:layout_gravity="center"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="30dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nguyễn Văn Dũng"
+                android:textColor="@color/colorPri"
+                android:fontFamily="@font/biotifbold"
+                android:textSize="20dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Online"
+                android:textColor="#666666"
+                />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/camecorder"
+            android:layout_gravity="right"
+            android:layout_marginEnd="10dp"
+            />
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/telephone"
+            android:layout_gravity="right"
+            android:padding="5dp"
+            />
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycle_message"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toobar"
+        android:layout_above="@+id/bootom"
+        android:padding="20dp"
+        />
+    <LinearLayout
+        android:id="@+id/bootom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        >
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/boder_edittex"
+            android:padding="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:hint="Message...."
+            />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/send"
+            app:tint="#666666"
+            android:padding="2dp"
+            android:layout_gravity="center_vertical"
+            />
+
+    </LinearLayout>
+</RelativeLayout>
