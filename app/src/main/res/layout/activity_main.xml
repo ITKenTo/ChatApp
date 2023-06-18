@@ -1,18 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backapp"
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/tv_chat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="Chats"
+        android:textSize="35dp"
+        android:textColor="@color/colorPri"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:fontFamily="@font/fontspringbiotifblack"
+        />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:id="@+id/option"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/baseline_more_horiz_24"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        app:tint="#666666" />
+
+     <LinearLayout
+         android:id="@+id/search_layout"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:orientation="horizontal"
+         android:layout_below="@+id/tv_chat"
+         android:background="@drawable/boder_edittex"
+         android:layout_margin="20dp"
+         android:gravity="center"
+         android:padding="5dp"
+         >
+
+         <ImageView
+             android:layout_width="30dp"
+             android:layout_height="30dp"
+             android:src="@drawable/search"
+             android:layout_gravity="center_vertical"
+             android:padding="5dp"
+             />
+         <androidx.appcompat.widget.AppCompatEditText
+             android:id="@+id/ed_search"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:background="@drawable/boder_edittex"
+             android:layout_gravity="center_vertical"
+             android:hint="Search..."
+             android:padding="5dp"
+             />
+     </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycle_people"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/search_layout"
+        android:padding="20dp"
+        />
+
+
+</RelativeLayout>
