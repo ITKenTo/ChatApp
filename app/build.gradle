@@ -7,6 +7,9 @@ android {
     namespace 'com.example.chat_app_k'
     compileSdk 33
 
+    buildFeatures {
+        viewBinding = true
+    }
     defaultConfig {
         applicationId "com.example.chat_app_k"
         minSdk 24
