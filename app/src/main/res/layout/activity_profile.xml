@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backapp"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/tv_chat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Profile"
+        android:textSize="35dp"
+        android:textColor="@color/colorPri"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:fontFamily="@font/fontspringbiotifblack"
+        />
+
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/left"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        app:tint="#666666" />
+
+    <ImageView
+        android:id="@+id/img_select"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/user"
+        android:layout_alignEnd="@+id/img_profile"
+        android:layout_below="@+id/img_profile"
+        android:layout_marginTop="-20dp"
+        android:layout_marginStart="20dp"
+        />
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/img_profile"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/avtleeminho"
+        app:shapeAppearanceOverlay="@style/Circler"
+        android:scaleType="centerCrop"
+        android:layout_gravity="center"
+        android:layout_below="@+id/back"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        />
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/tv_frofile_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Nhập Tên Của Bạn"
+        android:layout_below="@id/img_profile"
+        android:layout_centerHorizontal="true"
+        android:padding="10dp"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        android:background="@drawable/boder_edittex"
+        android:fontFamily="@font/biotifbold"
+        android:textColor="@color/colorPri"
+        android:layout_marginTop="25dp"
+        />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_update"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_frofile_name"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/boder_button"
+        android:text="Cập Nhật"
+        android:textColor="@color/white" />
+
+</RelativeLayout>

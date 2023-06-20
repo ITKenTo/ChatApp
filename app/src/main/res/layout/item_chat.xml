@@ -7,6 +7,7 @@
     android:orientation="horizontal">
 
     <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/it_img_avt"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:src="@drawable/avtleeminho"
@@ -24,6 +25,7 @@
             android:layout_weight="1"
             >
             <TextView
+                android:id="@+id/it_tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nguyễn Văn Dũng"
@@ -32,16 +34,19 @@
                 android:textSize="20dp"
                 />
             <TextView
+                android:id="@+id/it_tv_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Hello em có người yêu chưa"
                 android:textColor="#666666"
                 />
         </LinearLayout>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="9:32 AM"
+        <ImageView
+            android:id="@+id/it_tv_tt"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/dot"
+            android:scaleType="centerCrop"
              android:textColor="#666666"
             android:layout_gravity="right"
         />

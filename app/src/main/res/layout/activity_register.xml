@@ -28,17 +28,17 @@
         android:orientation="vertical"
         android:layout_margin="30dp"
         >
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/ed_username_res"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/boder_edittex"
-            android:hint="Tên Đăng Nhập"
-            android:maxLines="1"
-            android:padding="15dp"
-            android:textSize="20dp"
-            android:layout_margin="10dp"
-            />
+<!--        <androidx.appcompat.widget.AppCompatEditText-->
+<!--            android:id="@+id/ed_username_res"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@drawable/boder_edittex"-->
+<!--            android:hint="Tên Đăng Nhập"-->
+<!--            android:maxLines="1"-->
+<!--            android:padding="15dp"-->
+<!--            android:textSize="20dp"-->
+<!--            android:layout_margin="10dp"-->
+<!--            />-->
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/ed_fullname_res"
@@ -52,14 +52,14 @@
             android:maxLines="1"
             />
         <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/ed_phone_res"
+            android:id="@+id/ed_email_res"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/boder_edittex"
-            android:hint="Số Điện Thoại"
+            android:hint="Email"
             android:padding="15dp"
             android:textSize="20dp"
-            android:inputType="phone"
+            android:inputType="textEmailAddress"
             android:maxLines="1"
             android:layout_margin="10dp"
             />
