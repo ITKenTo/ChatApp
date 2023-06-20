@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "2553963704",
+    "firebase_url": "https://appchatk-f8678-default-rtdb.firebaseio.com",
+    "project_id": "appchatk-f8678",
+    "storage_bucket": "appchatk-f8678.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:2553963704:android:dcd8de9b3e4b377ea0004d",
+        "android_client_info": {
+          "package_name": "com.example.chat_app_k"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "2553963704-3ocfvvl4v80g3l6tbl22ee81m3os1g09.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcSq-dCEj2eAo1vdqFA6O3pAllbTlO8EY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "2553963704-3ocfvvl4v80g3l6tbl22ee81m3os1g09.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
