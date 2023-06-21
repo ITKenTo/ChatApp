@@ -1,7 +1,9 @@
 package com.example.chat_app_k
 
+import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -67,6 +69,13 @@ class DetailChatActivity : AppCompatActivity() {
                         Glide.with(this@DetailChatActivity).load(user.image).into(binding.imgChat)
                     }
                 }
+                if (user.status==1){
+                    binding.tvSttChat.setText("Online");
+                    binding.tvSttChat.setTextColor(getColor(R.color.green))
+                }else{
+                    binding.tvSttChat.visibility=View.GONE
+                }
+
                 getChat(firebaseUser!!.uid, uID, user.image.toString())
             }
 

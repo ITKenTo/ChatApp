@@ -118,6 +118,15 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+//    override fun onStop() {
+//        super.onStop()
+//        var databaseReference:DatabaseReference =FirebaseDatabase.getInstance().getReference("Users")
+//        val user:FirebaseUser? = mAth.currentUser
+//
+//        if (user != null) {
+//            databaseReference.child(user.uid).child("status").setValue(0)
+//        }
+//    }
     override fun onResume() {
         super.onResume()
         var databaseReference:DatabaseReference =FirebaseDatabase.getInstance().getReference("Users")
