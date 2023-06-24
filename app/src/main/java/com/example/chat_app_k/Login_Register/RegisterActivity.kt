@@ -2,6 +2,7 @@ package com.example.chat_app_k.Login_Register
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.chat_app_k.Model.AccountModel
@@ -25,7 +26,8 @@ class RegisterActivity : AppCompatActivity() {
         auth = Firebase.auth
         binding.apply {
             btnRes.setOnClickListener {
-                RegisterAccount(edEmailRes.text.toString(),edPasswdRes.text.toString())
+                validate()
+
             }
 
             tvLogin.setOnClickListener {
@@ -65,5 +67,32 @@ class RegisterActivity : AppCompatActivity() {
                     ).show()
                 }
             }
+    }
+    private fun validate(){
+        binding.apply {
+            if (edFullnameRes.text.toString().isEmpty()){
+                Toast.makeText(this@RegisterActivity,"Vui Lòng Nhập Tên",Toast.LENGTH_SHORT).show()
+                return
+            }
+
+            if (edEmailRes.text.toString().isEmpty()){
+                Toast.makeText(this@RegisterActivity,"Vui Lòng Nhập Email",Toast.LENGTH_SHORT).show()
+                return
+            }
+            if (edPasswdRes.text.toString().isEmpty()){
+                Toast.makeText(this@RegisterActivity,"Vui Lòng Nhập Pass ",Toast.LENGTH_SHORT).show()
+                return
+            }
+            if (edPasswdResConfim.text.toString().isEmpty()){
+                Toast.makeText(this@RegisterActivity,"Vui Lòng Nhập Lại Pass ",Toast.LENGTH_SHORT).show()
+                return
+            }
+
+            if (edPasswdResConfim.text.toString()!=edPasswdRes.text.toString()) {
+                Toast.makeText(this@RegisterActivity,"Mật khẩu không trùng khớp ",Toast.LENGTH_SHORT).show()
+                return
+            }
+            RegisterAccount(edEmailRes.text.toString(),edPasswdRes.text.toString())
+        }
     }
 }

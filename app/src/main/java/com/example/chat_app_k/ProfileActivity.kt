@@ -77,6 +77,9 @@ class ProfileActivity : AppCompatActivity() {
             btnUpdate.setOnClickListener {
              uploadData()
             }
+            linEdit.setOnClickListener {
+                startActivity(Intent(this@ProfileActivity,UpadateProfileActivity::class.java))
+            }
         }
 
     }

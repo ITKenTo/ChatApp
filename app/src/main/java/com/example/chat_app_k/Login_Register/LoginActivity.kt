@@ -35,7 +35,7 @@ class LoginActivity : AppCompatActivity() {
         mAth=Firebase.auth
         binding.apply {
             btnLogin.setOnClickListener {
-                LoginAccount(edUsername.text.toString(), edPasswd.text.toString())
+                validate()
             }
             tvRegister.setOnClickListener {
                 startActivity( Intent(this@LoginActivity,RegisterActivity::class.java))
@@ -60,4 +60,19 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
     }
+
+    private fun validate(){
+            binding.apply {
+                if (edUsername.text.toString().isEmpty()){
+                    Toast.makeText(this@LoginActivity,"Vui Lòng Nhập Email",Toast.LENGTH_SHORT).show()
+                    return
+                }
+
+                if (edPasswd.text.toString().isEmpty()){
+                    Toast.makeText(this@LoginActivity,"Vui Lòng Nhập Password",Toast.LENGTH_SHORT).show()
+                    return
+                }
+                LoginAccount(edUsername.text.toString(),edPasswd.text.toString())
+            }
+        }
 }
