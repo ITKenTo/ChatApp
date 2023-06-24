@@ -76,6 +76,18 @@
             android:inputType="textPassword"
             />
 
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/ed_passwd_res_confim"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/boder_edittex"
+            android:hint="Nhập Lại Mật Khẩu"
+            android:padding="15dp"
+            android:textSize="20dp"
+            android:layout_margin="10dp"
+            android:maxLines="1"
+            android:inputType="textPassword"
+            />
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
