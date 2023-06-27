@@ -1,11 +1,13 @@
 package com.example.chat_app_k.Adapter
 
+import android.app.AlertDialog
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.chat_app_k.Model.AccountModel
@@ -59,7 +61,39 @@ class ChatAdapter(var list: List<ChatModel>, var context: Context, var img_url:S
         }else{
             Glide.with(context).load(img_url).into(holder.img_chat)
         }
+        holder.itemView.setOnLongClickListener {
+            Delete(chat)
 
+        }
+        holder.itemView.setOnClickListener {
+            Toast.makeText(context,chat.cid,Toast.LENGTH_SHORT).show()
+
+        }
+
+    }
+
+
+    private fun Delete(obj:ChatModel): Boolean {
+        val builder= AlertDialog.Builder(context)
+        builder.setTitle("Thông báo")
+        builder.setMessage("Bạn có chắc chắn muốn xóa tin nhắn?")
+        firebaseUser=FirebaseAuth.getInstance().currentUser
+        builder.setNegativeButton("Ok"){dialog,which->
+            if (obj.senderId==firebaseUser!!.uid) {
+                val databaseReference= FirebaseDatabase.getInstance().getReference("Chats")
+                databaseReference.child(obj.cid!!).removeValue()
+            }else{
+                Toast.makeText(context,"Koong thể xóa tin nhắn người gửi",Toast.LENGTH_SHORT).show()
+            }
+        }
+        builder.setPositiveButton("Cancel"){dialog,which->
+                 dialog.dismiss()
+        }
+        val dialog= builder.create()
+
+        dialog.show()
+
+        return true
     }
 
     override fun getItemViewType(position: Int): Int {

@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
@@ -30,6 +31,7 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var databaseReference: DatabaseReference
 
     private var selectedImg: Uri? = null
+    private var urlimg:String?=""
 
     private val PICK_IMAGE_REQUEST: Int = 2020
 
@@ -52,6 +54,7 @@ class ProfileActivity : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val user= snapshot.getValue(AccountModel::class.java)
                 binding.tvFrofileName.setText(user!!.fullname)
+                urlimg=user.image
                 if (user.image=="null"){
                     binding.imgProfile.setImageResource(R.drawable.avtleeminho)
                 }else{
@@ -75,12 +78,13 @@ class ProfileActivity : AppCompatActivity() {
 
             }
             btnUpdate.setOnClickListener {
-             uploadData()
+                uploadData()
             }
             linEdit.setOnClickListener {
                 startActivity(Intent(this@ProfileActivity,UpadateProfileActivity::class.java))
             }
         }
+        Log.d("IMG",binding.imgProfile.toString())
 
     }
 
@@ -104,20 +108,25 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun uploadData(){
         val  reference= storage.reference.child("Profile").child(Date().time.toString())
-        reference.putFile(selectedImg!!).addOnCompleteListener {
-            if (it.isSuccessful){
-                reference.downloadUrl.addOnSuccessListener{task->
-                    uploaInfor(task.toString())
+        if (selectedImg==null) {
+            uploaInfor(urlimg.toString())
+
+        }else {
+            reference.putFile(selectedImg!!).addOnCompleteListener {
+                if (it.isSuccessful) {
+                    reference.downloadUrl.addOnSuccessListener { task ->
+                        uploaInfor(task.toString())
+                    }
                 }
             }
         }
     }
 
     private fun uploaInfor(imgurl: String) {
-
         databaseReference.child("image").setValue(imgurl).addOnSuccessListener {
             Toast.makeText(this,"Thành Công", Toast.LENGTH_SHORT).show()
         }
+
 
     }
 

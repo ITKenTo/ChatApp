@@ -20,11 +20,11 @@ class AccountAdapter(var list: List<AccountModel>, var context: Context):Recycle
         val img_stt: ImageView = itemView.findViewById(R.id.it_tv_tt)
         val img_image: ImageView = itemView.findViewById(R.id.it_img_avt)
     }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AccontViewHolder {
         val view= LayoutInflater.from(context).inflate(R.layout.item_chat,parent,false)
         return AccontViewHolder(view)
     }
+
     override fun onBindViewHolder(holder: AccontViewHolder, position: Int) {
         holder.tv_name.setText(list[position].fullname)
         holder.tv_email.setText(list[position].email)
@@ -50,5 +50,9 @@ class AccountAdapter(var list: List<AccountModel>, var context: Context):Recycle
         return list.size
     }
 
+//    fun fillter(filter: ArrayListList<AccountModel>){
+//        list=filter
+//        notifyDataSetChanged()
+//    }
 
 }

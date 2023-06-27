@@ -68,6 +68,10 @@ class RegisterActivity : AppCompatActivity() {
                 }
             }
     }
+    fun isValidEmail(email: String): Boolean {
+        val regex = Regex("^[A-Za-z](.*)([@]{1})(.{1,})(\\.)(.{1,})")
+        return regex.matches(email)
+    }
     private fun validate(){
         binding.apply {
             if (edFullnameRes.text.toString().isEmpty()){
@@ -79,10 +83,19 @@ class RegisterActivity : AppCompatActivity() {
                 Toast.makeText(this@RegisterActivity,"Vui Lòng Nhập Email",Toast.LENGTH_SHORT).show()
                 return
             }
+            if (!isValidEmail(edEmailRes.text.toString())){
+                Toast.makeText(this@RegisterActivity,"Định dạng email không hợp lệ",Toast.LENGTH_SHORT).show()
+                return
+            }
             if (edPasswdRes.text.toString().isEmpty()){
                 Toast.makeText(this@RegisterActivity,"Vui Lòng Nhập Pass ",Toast.LENGTH_SHORT).show()
                 return
             }
+            if (edPasswdRes.text.toString().length<6){
+                Toast.makeText(this@RegisterActivity,"Mật Khẩu Ít Nhất Phải Từ 6 Kí Tự Trở Lên ",Toast.LENGTH_SHORT).show()
+                return
+            }
+
             if (edPasswdResConfim.text.toString().isEmpty()){
                 Toast.makeText(this@RegisterActivity,"Vui Lòng Nhập Lại Pass ",Toast.LENGTH_SHORT).show()
                 return
@@ -92,6 +105,8 @@ class RegisterActivity : AppCompatActivity() {
                 Toast.makeText(this@RegisterActivity,"Mật khẩu không trùng khớp ",Toast.LENGTH_SHORT).show()
                 return
             }
+
+
             RegisterAccount(edEmailRes.text.toString(),edPasswdRes.text.toString())
         }
     }
