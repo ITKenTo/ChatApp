@@ -4,9 +4,13 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.widget.LinearLayout
 import android.widget.PopupMenu
+import android.widget.SearchView
+import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.chat_app_k.Adapter.AccountAdapter
@@ -20,26 +24,28 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.Query
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
 import kotlin.math.log
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding:ActivityMainBinding
-    private lateinit var mAth:FirebaseAuth
-    var listAccount= ArrayList<AccountModel>()
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var mAth: FirebaseAuth
+    var listAccount = ArrayList<AccountModel>()
+    private lateinit var adapter: AccountAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mAth=Firebase.auth
-       // setContentView(R.layout.activity_main)
-        binding=ActivityMainBinding.inflate(layoutInflater)
+        mAth = Firebase.auth
+        // setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.recyclePeople.layoutManager= LinearLayoutManager(this,RecyclerView.VERTICAL, false)
+        binding.recyclePeople.layoutManager =
+            LinearLayoutManager(this, RecyclerView.VERTICAL, false)
 
         getUserList()
-//        adapter= AccountAdapter(listAccount,this)
-//        binding.recyclePeople.adapter=adapter
+
         Log.d("SIZE", listAccount.toString())
         //adapter.notifyDataSetChanged()
         binding.option.setOnClickListener {
@@ -49,25 +55,29 @@ class MainActivity : AppCompatActivity() {
                 when (item.itemId) {
                     R.id.profile -> {
                         // Xử lý khi nhấp vào menu item 1
-                        startActivity(Intent(this,ProfileActivity::class.java))
+                        startActivity(Intent(this, ProfileActivity::class.java))
                         true
                     }
+
                     R.id.logout -> {
                         // Xử lý khi nhấp vào menu item 2
-                        var databaseReference:DatabaseReference =FirebaseDatabase.getInstance().getReference("Users")
-                        val user:FirebaseUser? = mAth.currentUser
+                        var databaseReference: DatabaseReference =
+                            FirebaseDatabase.getInstance().getReference("Users")
+                        val user: FirebaseUser? = mAth.currentUser
                         if (user != null) {
                             databaseReference.child(user.uid).child("status").setValue(0)
                         }
                         mAth.signOut()
-                        startActivity(Intent(this,LoginActivity::class.java))
+                        startActivity(Intent(this, LoginActivity::class.java))
                         true
                     }
+
                     else -> false
                 }
             }
             popupMenu.show()
         }
+
 
     }
     private fun getUserList(){
@@ -98,14 +108,14 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-//    override fun onde() {
-//        super.onPause()
-//        var databaseReference:DatabaseReference =FirebaseDatabase.getInstance().getReference("Users")
-//        val user:FirebaseUser? = mAth.currentUser
-//
-//        if (user != null) {
-//            databaseReference.child(user.uid).child("status").setValue(0)
+//    fun searchList(text:String) {
+//        val searchlist= ArrayList<AccountModel>()
+//        for (data in listAccount){
+//            if (data.fullname?.lowercase()?.contains(text.lowercase())==true){
+//                searchlist.add(data)
+//            }
 //        }
+//        adapter.fillter(searchlist)
 //    }
 
     override fun onDestroy() {
