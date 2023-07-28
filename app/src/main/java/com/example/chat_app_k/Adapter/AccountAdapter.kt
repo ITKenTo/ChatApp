@@ -50,9 +50,9 @@ class AccountAdapter(var list: List<AccountModel>, var context: Context):Recycle
         return list.size
     }
 
-//    fun fillter(filter: ArrayListList<AccountModel>){
-//        list=filter
-//        notifyDataSetChanged()
-//    }
+    fun fillter(filter: ArrayList<AccountModel>){
+        list=filter
+        notifyDataSetChanged()
+    }
 
 }

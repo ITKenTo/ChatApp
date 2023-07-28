@@ -78,6 +78,19 @@ class MainActivity : AppCompatActivity() {
             popupMenu.show()
         }
 
+        binding.edSearchCc.addTextChangedListener(object :TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                searchList(s.toString())
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+        })
 
     }
     private fun getUserList(){
@@ -97,7 +110,7 @@ class MainActivity : AppCompatActivity() {
                         listAccount.add(account)
                   }
                 }
-                val adapter= AccountAdapter(listAccount,this@MainActivity)
+                 adapter= AccountAdapter(listAccount,this@MainActivity)
                 binding.recyclePeople.adapter=adapter
                 adapter.notifyDataSetChanged()
 
@@ -108,15 +121,15 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-//    fun searchList(text:String) {
-//        val searchlist= ArrayList<AccountModel>()
-//        for (data in listAccount){
-//            if (data.fullname?.lowercase()?.contains(text.lowercase())==true){
-//                searchlist.add(data)
-//            }
-//        }
-//        adapter.fillter(searchlist)
-//    }
+    fun searchList(text:String) {
+        val searchlist= ArrayList<AccountModel>()
+        for (data in listAccount){
+            if (data.fullname?.lowercase()?.contains(text.lowercase())==true){
+                searchlist.add(data)
+            }
+        }
+        adapter.fillter(searchlist)
+    }
 
     override fun onDestroy() {
         super.onDestroy()
