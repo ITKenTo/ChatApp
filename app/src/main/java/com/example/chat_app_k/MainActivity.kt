@@ -1,19 +1,18 @@
 package com.example.chat_app_k
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.widget.LinearLayout
 import android.widget.PopupMenu
-import android.widget.SearchView
-import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.chat_app_k.Adapter.AccountAdapter
+import com.example.chat_app_k.Firabase.FirabaseSevice
 import com.example.chat_app_k.Login_Register.LoginActivity
 import com.example.chat_app_k.Model.AccountModel
 import com.example.chat_app_k.databinding.ActivityMainBinding
@@ -27,6 +26,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.Query
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlin.math.log
 
 class MainActivity : AppCompatActivity() {
@@ -45,6 +45,17 @@ class MainActivity : AppCompatActivity() {
             LinearLayoutManager(this, RecyclerView.VERTICAL, false)
 
         getUserList()
+        FirabaseSevice.sharedPref = getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
+        FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                return@addOnCompleteListener
+            }
+            if (task.result != null) {
+                val token: String = task.result
+                Log.d("TOKEN", "onCreate: $token")
+                FirabaseSevice.token=token
+            }
+        }
 
         Log.d("SIZE", listAccount.toString())
         //adapter.notifyDataSetChanged()
@@ -107,12 +118,15 @@ class MainActivity : AppCompatActivity() {
 
 
                    if (!account!!.uid.equals(user!!.uid)) {
+
+                        var userID= user.uid
+                       FirebaseMessaging.getInstance().subscribeToTopic("/topics/$userID")
                         listAccount.add(account)
                   }
                 }
                  adapter= AccountAdapter(listAccount,this@MainActivity)
-                binding.recyclePeople.adapter=adapter
-                adapter.notifyDataSetChanged()
+                 binding.recyclePeople.adapter=adapter
+                 adapter.notifyDataSetChanged()
 
             }
             override fun onCancelled(error: DatabaseError) {

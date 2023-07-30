@@ -66,7 +66,6 @@ class ChatAdapter(var list: List<ChatModel>, var context: Context, var img_url:S
 
         }
         holder.itemView.setOnClickListener {
-            Toast.makeText(context,chat.cid,Toast.LENGTH_SHORT).show()
 
         }
 
@@ -83,7 +82,7 @@ class ChatAdapter(var list: List<ChatModel>, var context: Context, var img_url:S
                 val databaseReference= FirebaseDatabase.getInstance().getReference("Chats")
                 databaseReference.child(obj.cid!!).removeValue()
             }else{
-                Toast.makeText(context,"Koong thể xóa tin nhắn người gửi",Toast.LENGTH_SHORT).show()
+                Toast.makeText(context,"Khong thể xóa tin nhắn người gửi",Toast.LENGTH_SHORT).show()
             }
         }
         builder.setPositiveButton("Cancel"){dialog,which->
