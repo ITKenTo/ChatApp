@@ -1,10 +1,8 @@
 package com.example.chat_app_k
 
-import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,6 +11,8 @@ import com.bumptech.glide.Glide
 import com.example.chat_app_k.Adapter.ChatAdapter
 import com.example.chat_app_k.Model.AccountModel
 import com.example.chat_app_k.Model.ChatModel
+import com.example.chat_app_k.Model.NotificationData
+import com.example.chat_app_k.Model.PushNotification
 import com.example.chat_app_k.databinding.ActivityDetailChatBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -21,6 +21,10 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.gson.Gson
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.text.DateFormat
 import java.util.Calendar
 
@@ -29,6 +33,7 @@ class DetailChatActivity : AppCompatActivity() {
     var firebaseUser:FirebaseUser?=null
     var databaseReference:DatabaseReference?=null
     var listChat= ArrayList<ChatModel>()
+    var topic = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +44,7 @@ class DetailChatActivity : AppCompatActivity() {
 
         val intent= getIntent()
         val uID= intent.getStringExtra("uID")
-
+        val username= intent.getStringExtra("username")
         binding.recycleMessage.layoutManager= LinearLayoutManager(this, RecyclerView.VERTICAL,false)
 
         firebaseUser=FirebaseAuth.getInstance().currentUser
@@ -51,7 +56,18 @@ class DetailChatActivity : AppCompatActivity() {
             }
 
             imgSend.setOnClickListener {
-                sendMessage(firebaseUser!!.uid,uID,currentDate)
+                var message= binding.edMessage.text.toString()
+                Log.d("111", "onCreate: "+message+username)
+                if (!message.isEmpty()){
+                    sendMessage(firebaseUser!!.uid,uID,currentDate)
+                    topic = "/topics/$uID"
+                    PushNotification(
+                        NotificationData(username!!,message),
+                        topic).also {
+                        sendNotification(it)
+                    }
+                }
+
             }
         }
 
@@ -61,7 +77,9 @@ class DetailChatActivity : AppCompatActivity() {
         databaseReference!!.addValueEventListener(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 val user= snapshot.getValue(AccountModel::class.java)
+//                name= user!!.fullname.toString()
                 binding.tvNameChat.setText(user!!.fullname)
+
                 if (user.image=="null"){
                     binding.imgChat.setImageResource(R.drawable.avtleeminho)
                 }else{
@@ -130,5 +148,20 @@ class DetailChatActivity : AppCompatActivity() {
                     Toast.LENGTH_SHORT
                 ).show()
             }
+    }
+
+
+    private fun sendNotification(notification: PushNotification) = CoroutineScope(Dispatchers.IO).launch {
+        try {
+            val response = RetrofitIntance.api.postNotification(notification)
+            if(response.isSuccessful) {
+//                Log.d("TAG", "Response: ${Gson().toJson(response)}")
+//                Toast.makeText(this@DetailChatActivity,"Response: ${Gson().toJson(response)}",Toast.LENGTH_SHORT).show()
+            } else {
+                Log.e("TAG", response.errorBody()!!.string())
+            }
+        } catch(e: Exception) {
+            Log.e("TAGE", e.toString())
+        }
     }
 }

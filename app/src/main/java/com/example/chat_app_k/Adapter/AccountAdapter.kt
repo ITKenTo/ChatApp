@@ -43,6 +43,7 @@ class AccountAdapter(var list: List<AccountModel>, var context: Context):Recycle
         holder.itemView.setOnClickListener {
             val intent= Intent(context,DetailChatActivity::class.java)
             intent.putExtra("uID",list[position].uid)
+            intent.putExtra("username", list[position].fullname)
             context.startActivity(intent)
         }
     }
